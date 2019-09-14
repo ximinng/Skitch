@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ximingxing.blog.server.dao.ArticleWithLabelsMapper">
+  <resultMap id="BaseResultMap" type="com.ximingxing.blog.server.pojo.ArticleWithLabelsKey">
+    <id column="article_id" jdbcType="INTEGER" property="articleId" />
+    <id column="label_id" jdbcType="INTEGER" property="labelId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.ximingxing.blog.server.pojo.ArticleWithLabelsKey">
+    delete from set_article_labels
+    where article_id = #{articleId,jdbcType=INTEGER}
+      and label_id = #{labelId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ximingxing.blog.server.pojo.ArticleWithLabelsKey">
+    insert into set_article_labels (article_id, label_id)
+    values (#{articleId,jdbcType=INTEGER}, #{labelId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ximingxing.blog.server.pojo.ArticleWithLabelsKey">
+    insert into set_article_labels
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        article_id,
+      </if>
+      <if test="labelId != null">
+        label_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="labelId != null">
+        #{labelId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

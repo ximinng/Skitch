@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ximingxing.blog.server.dao.SortMapper">
+  <resultMap id="BaseResultMap" type="com.ximingxing.blog.server.pojo.Sort">
+    <id column="sort_id" jdbcType="INTEGER" property="sortId" />
+    <result column="sort_name" jdbcType="VARCHAR" property="sortName" />
+    <result column="sort_desc" jdbcType="VARCHAR" property="sortDesc" />
+    <result column="sort_parent_id" jdbcType="INTEGER" property="sortParentId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sort_id, sort_name, sort_desc, sort_parent_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blog_sort
+    where sort_id = #{sortId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blog_sort
+    where sort_id = #{sortId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ximingxing.blog.server.pojo.Sort">
+    insert into blog_sort (sort_id, sort_name, sort_desc, 
+      sort_parent_id)
+    values (#{sortId,jdbcType=INTEGER}, #{sortName,jdbcType=VARCHAR}, #{sortDesc,jdbcType=VARCHAR}, 
+      #{sortParentId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ximingxing.blog.server.pojo.Sort">
+    insert into blog_sort
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sortId != null">
+        sort_id,
+      </if>
+      <if test="sortName != null">
+        sort_name,
+      </if>
+      <if test="sortDesc != null">
+        sort_desc,
+      </if>
+      <if test="sortParentId != null">
+        sort_parent_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sortId != null">
+        #{sortId,jdbcType=INTEGER},
+      </if>
+      <if test="sortName != null">
+        #{sortName,jdbcType=VARCHAR},
+      </if>
+      <if test="sortDesc != null">
+        #{sortDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="sortParentId != null">
+        #{sortParentId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ximingxing.blog.server.pojo.Sort">
+    update blog_sort
+    <set>
+      <if test="sortName != null">
+        sort_name = #{sortName,jdbcType=VARCHAR},
+      </if>
+      <if test="sortDesc != null">
+        sort_desc = #{sortDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="sortParentId != null">
+        sort_parent_id = #{sortParentId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sort_id = #{sortId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ximingxing.blog.server.pojo.Sort">
+    update blog_sort
+    set sort_name = #{sortName,jdbcType=VARCHAR},
+      sort_desc = #{sortDesc,jdbcType=VARCHAR},
+      sort_parent_id = #{sortParentId,jdbcType=INTEGER}
+    where sort_id = #{sortId,jdbcType=INTEGER}
+  </update>
+</mapper>
