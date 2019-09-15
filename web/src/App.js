@@ -3,8 +3,7 @@ import {Provider} from 'react-redux';
 import store from './store';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
-import {view as Home} from './pages/home';
-import {view as Article} from './pages/article';
+import {view as Portal} from './common/portal';
 import {view as Admin} from './pages/admin/home';
 
 class App extends Component {
@@ -14,11 +13,9 @@ class App extends Component {
                 <BrowserRouter>
                     <Fragment>
                         <Switch>
-                            <Route path={'/'} exact component={Home}/>
-                            <Route path={'/article'} component={Article}/>
+                            <Route path={'/home'} component={(props) => <Portal {...props}/>}/>
                             <Route path={'/admin'} component={Admin}/>
-                        </Switch>
-                        <Switch>
+                            <Route component={(props) => <Portal {...props}/>}/>
                         </Switch>
                     </Fragment>
                 </BrowserRouter>
