@@ -12,7 +12,7 @@ function Portal({match}) {
     return (
         <Layout>
             <Header style={{position: 'fixed', zIndex: 1, width: '100%', backgroundColor: '#FFFFFF'}}>
-                <div className="logo"/>
+                {/*<div className="logo"/>*/}
                 <Menu theme="light"
                       mode="horizontal"
                       style={{lineHeight: '64px'}}
