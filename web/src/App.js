@@ -4,7 +4,7 @@ import store from './store';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import {view as Portal} from './common/portal';
-import {view as Admin} from './pages/admin/home';
+import {view as Admin} from './common/admin';
 
 class App extends Component {
     render() {
@@ -14,7 +14,7 @@ class App extends Component {
                     <Fragment>
                         <Switch>
                             <Route path={'/home'} component={(props) => <Portal {...props}/>}/>
-                            <Route path={'/admin'} component={Admin}/>
+                            <Route path={'/admin'} component={(props) => <Admin {...props}/>}/>
                             <Route component={(props) => <Portal {...props}/>}/>
                         </Switch>
                     </Fragment>

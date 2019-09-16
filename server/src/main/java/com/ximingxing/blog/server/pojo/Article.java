@@ -2,12 +2,14 @@ package com.ximingxing.blog.server.pojo;
 
 import java.util.Date;
 
-public class Article extends ArticleKey {
+public class Article {
+    private Integer articleId;
+
+    private String articleAlias;
+
     private String articleTitle;
 
     private Integer articleSort;
-
-    private String articleCover;
 
     private Integer articleViews;
 
@@ -20,6 +22,22 @@ public class Article extends ArticleKey {
     private Date updateTime;
 
     private String articleContent;
+
+    public Integer getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(Integer articleId) {
+        this.articleId = articleId;
+    }
+
+    public String getArticleAlias() {
+        return articleAlias;
+    }
+
+    public void setArticleAlias(String articleAlias) {
+        this.articleAlias = articleAlias == null ? null : articleAlias.trim();
+    }
 
     public String getArticleTitle() {
         return articleTitle;
@@ -35,14 +53,6 @@ public class Article extends ArticleKey {
 
     public void setArticleSort(Integer articleSort) {
         this.articleSort = articleSort;
-    }
-
-    public String getArticleCover() {
-        return articleCover;
-    }
-
-    public void setArticleCover(String articleCover) {
-        this.articleCover = articleCover == null ? null : articleCover.trim();
     }
 
     public Integer getArticleViews() {

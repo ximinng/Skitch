@@ -1,17 +1,17 @@
-// import axios from 'axios';
-// import * as actionTypes from './actionTypes';
+import axios from 'axios';
+import * as actionTypes from './actionTypes';
 
-// const changeDetail = (title, content) => ({
-//     type: actionTypes.CHANGE_DETAIL,
-//     title,
-//     content
-// });
+const getDetail = (title, article) => ({
+    type: actionTypes.GET_ARTICLE,
+    title,
+    article
+});
 
-// export const getDetail = (id) => {
-//     return (dispatch) => {
-//         axios.get('/api/detail.json?id' + id).then((res) => {
-//             const result = res.data.data;
-//             dispatch(changeDetail(result.title, result.content));
-//         })
-//     }
-// };
+export const getArticle = (id) => {
+    return (dispatch) => {
+        axios.get("/api/article.json?id" + id).then((res) => {
+            const data = res.data.data;
+            dispatch(getDetail(data.title, data.article));
+        })
+    }
+};

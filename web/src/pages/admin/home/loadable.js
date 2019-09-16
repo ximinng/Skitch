@@ -9,7 +9,7 @@ function Loading(props) {
     } else if (props.pastDelay) {
         return <div>Loading...</div>;
     } else {
-        return <div>sss</div>;
+        return <div>Admin-Home 正在加载....</div>;
     }
 }
 

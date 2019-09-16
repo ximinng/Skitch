@@ -69,20 +69,20 @@
         <table tableName="blog_article" domainObjectName="Article" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"/>
-        <table tableName="blog_comment" domainObjectName="Comment" enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
-        <table tableName="blog_friend_link" domainObjectName="FriendLink" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false"/>
-        <table tableName="blog_label" domainObjectName="Label" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false"/>
-        <table tableName="blog_sort" domainObjectName="Sort" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false"/>
-        <table tableName="set_article_labels" domainObjectName="ArticleWithLabels" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false"/>
+<!--        <table tableName="blog_comment" domainObjectName="Comment" enableCountByExample="false"-->
+<!--               enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>-->
+<!--        <table tableName="blog_friend_link" domainObjectName="FriendLink" enableCountByExample="false"-->
+<!--               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"/>-->
+<!--        <table tableName="blog_label" domainObjectName="Label" enableCountByExample="false"-->
+<!--               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"/>-->
+<!--        <table tableName="blog_sort" domainObjectName="Sort" enableCountByExample="false"-->
+<!--               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"/>-->
+<!--        <table tableName="set_article_labels" domainObjectName="ArticleWithLabels" enableCountByExample="false"-->
+<!--               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false"/>-->
     </context>
 </generatorConfiguration>

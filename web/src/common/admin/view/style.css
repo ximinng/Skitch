@@ -1,0 +1,10 @@
+.ant-menu {
+    float: right;
+    line-height: 64px;
+    height: 100%;
+    border-right: 0px;
+}
+
+.ant-sider {
+    background: #fff;
+}

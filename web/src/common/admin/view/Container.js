@@ -1,19 +1,17 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import Article from './Article';
+import Admin from './Admin';
 
 class Container extends PureComponent {
     render() {
         return (
-            <Article/>
+            <Admin match={this.props.match}/>
         );
     }
 }
 
-const mapStateToProps = (state) => ({
-});
+const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = (dispatch) => ({
-});
+const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Container);
