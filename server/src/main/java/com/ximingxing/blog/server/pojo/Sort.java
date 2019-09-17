@@ -1,5 +1,12 @@
 package com.ximingxing.blog.server.pojo;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Sort {
     private Integer sortId;
 
@@ -8,36 +15,4 @@ public class Sort {
     private String sortDesc;
 
     private Integer sortParentId;
-
-    public Integer getSortId() {
-        return sortId;
-    }
-
-    public void setSortId(Integer sortId) {
-        this.sortId = sortId;
-    }
-
-    public String getSortName() {
-        return sortName;
-    }
-
-    public void setSortName(String sortName) {
-        this.sortName = sortName == null ? null : sortName.trim();
-    }
-
-    public String getSortDesc() {
-        return sortDesc;
-    }
-
-    public void setSortDesc(String sortDesc) {
-        this.sortDesc = sortDesc == null ? null : sortDesc.trim();
-    }
-
-    public Integer getSortParentId() {
-        return sortParentId;
-    }
-
-    public void setSortParentId(Integer sortParentId) {
-        this.sortParentId = sortParentId;
-    }
 }

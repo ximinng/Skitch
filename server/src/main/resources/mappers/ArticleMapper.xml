@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ximingxing.blog.server.dao.ArticleMapper">
-  <resultMap id="BaseResultMap" type="com.ximingxing.blog.server.pojo.Article">
-    <id column="article_id" jdbcType="INTEGER" property="articleId" />
-    <result column="article_alias" jdbcType="VARCHAR" property="articleAlias" />
-    <result column="article_title" jdbcType="VARCHAR" property="articleTitle" />
-    <result column="article_sort" jdbcType="INTEGER" property="articleSort" />
-    <result column="article_views" jdbcType="INTEGER" property="articleViews" />
-    <result column="article_comments" jdbcType="INTEGER" property="articleComments" />
-    <result column="article_status" jdbcType="INTEGER" property="articleStatus" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ximingxing.blog.server.pojo.Article">
-    <result column="article_content" jdbcType="LONGVARCHAR" property="articleContent" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.ximingxing.blog.server.pojo.Article">
+        <id column="article_id" jdbcType="INTEGER" property="articleId"/>
+        <result column="article_alias" jdbcType="VARCHAR" property="articleAlias"/>
+        <result column="article_title" jdbcType="VARCHAR" property="articleTitle"/>
+        <result column="article_sort" jdbcType="INTEGER" property="articleSort"/>
+        <result column="article_views" jdbcType="INTEGER" property="articleViews"/>
+        <result column="article_comments" jdbcType="INTEGER" property="articleComments"/>
+        <result column="article_status" jdbcType="INTEGER" property="articleStatus"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ximingxing.blog.server.pojo.Article">
+        <result column="article_content" jdbcType="LONGVARCHAR" property="articleContent"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     article_id, article_alias, article_title, article_sort, article_views, article_comments, 
     article_status, create_time, update_time
   </sql>
-  <sql id="Blob_Column_List">
+    <sql id="Blob_Column_List">
     article_content
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from blog_article
-    where article_id = #{articleId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from blog_article
+        where article_id = #{articleId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from blog_article
     where article_id = #{articleId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.ximingxing.blog.server.pojo.Article">
+    <insert id="insert" parameterType="com.ximingxing.blog.server.pojo.Article">
     insert into blog_article (article_id, article_alias, article_title, 
       article_sort, article_views, article_comments, 
       article_status, create_time, update_time, 
@@ -44,107 +44,110 @@
       #{articleStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{articleContent,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ximingxing.blog.server.pojo.Article">
-    insert into blog_article
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="articleId != null">
-        article_id,
-      </if>
-      <if test="articleAlias != null">
-        article_alias,
-      </if>
-      <if test="articleTitle != null">
-        article_title,
-      </if>
-      <if test="articleSort != null">
-        article_sort,
-      </if>
-      <if test="articleViews != null">
-        article_views,
-      </if>
-      <if test="articleComments != null">
-        article_comments,
-      </if>
-      <if test="articleStatus != null">
-        article_status,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-      <if test="articleContent != null">
-        article_content,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="articleId != null">
-        #{articleId,jdbcType=INTEGER},
-      </if>
-      <if test="articleAlias != null">
-        #{articleAlias,jdbcType=VARCHAR},
-      </if>
-      <if test="articleTitle != null">
-        #{articleTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="articleSort != null">
-        #{articleSort,jdbcType=INTEGER},
-      </if>
-      <if test="articleViews != null">
-        #{articleViews,jdbcType=INTEGER},
-      </if>
-      <if test="articleComments != null">
-        #{articleComments,jdbcType=INTEGER},
-      </if>
-      <if test="articleStatus != null">
-        #{articleStatus,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="articleContent != null">
-        #{articleContent,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ximingxing.blog.server.pojo.Article">
-    update blog_article
-    <set>
-      <if test="articleAlias != null">
-        article_alias = #{articleAlias,jdbcType=VARCHAR},
-      </if>
-      <if test="articleTitle != null">
-        article_title = #{articleTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="articleSort != null">
-        article_sort = #{articleSort,jdbcType=INTEGER},
-      </if>
-      <if test="articleViews != null">
-        article_views = #{articleViews,jdbcType=INTEGER},
-      </if>
-      <if test="articleComments != null">
-        article_comments = #{articleComments,jdbcType=INTEGER},
-      </if>
-      <if test="articleStatus != null">
-        article_status = #{articleStatus,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="articleContent != null">
-        article_content = #{articleContent,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where article_id = #{articleId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ximingxing.blog.server.pojo.Article">
+    <insert id="insertSelectiveAndReturnKey" parameterType="com.ximingxing.blog.server.pojo.Article">
+        insert into blog_article
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="articleId != null">
+                article_id,
+            </if>
+            <if test="articleAlias != null">
+                article_alias,
+            </if>
+            <if test="articleTitle != null">
+                article_title,
+            </if>
+            <if test="articleSort != null">
+                article_sort,
+            </if>
+            <if test="articleViews != null">
+                article_views,
+            </if>
+            <if test="articleComments != null">
+                article_comments,
+            </if>
+            <if test="articleStatus != null">
+                article_status,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="articleContent != null">
+                article_content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="articleId != null">
+                #{articleId,jdbcType=INTEGER},
+            </if>
+            <if test="articleAlias != null">
+                #{articleAlias,jdbcType=VARCHAR},
+            </if>
+            <if test="articleTitle != null">
+                #{articleTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="articleSort != null">
+                #{articleSort,jdbcType=INTEGER},
+            </if>
+            <if test="articleViews != null">
+                #{articleViews,jdbcType=INTEGER},
+            </if>
+            <if test="articleComments != null">
+                #{articleComments,jdbcType=INTEGER},
+            </if>
+            <if test="articleStatus != null">
+                #{articleStatus,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="articleContent != null">
+                #{articleContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+        <selectKey keyProperty="articleId" order="AFTER" resultType="int">
+            select LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ximingxing.blog.server.pojo.Article">
+        update blog_article
+        <set>
+            <if test="articleAlias != null">
+                article_alias = #{articleAlias,jdbcType=VARCHAR},
+            </if>
+            <if test="articleTitle != null">
+                article_title = #{articleTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="articleSort != null">
+                article_sort = #{articleSort,jdbcType=INTEGER},
+            </if>
+            <if test="articleViews != null">
+                article_views = #{articleViews,jdbcType=INTEGER},
+            </if>
+            <if test="articleComments != null">
+                article_comments = #{articleComments,jdbcType=INTEGER},
+            </if>
+            <if test="articleStatus != null">
+                article_status = #{articleStatus,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="articleContent != null">
+                article_content = #{articleContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where article_id = #{articleId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ximingxing.blog.server.pojo.Article">
     update blog_article
     set article_alias = #{articleAlias,jdbcType=VARCHAR},
       article_title = #{articleTitle,jdbcType=VARCHAR},
@@ -157,7 +160,7 @@
       article_content = #{articleContent,jdbcType=LONGVARCHAR}
     where article_id = #{articleId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ximingxing.blog.server.pojo.Article">
+    <update id="updateByPrimaryKey" parameterType="com.ximingxing.blog.server.pojo.Article">
     update blog_article
     set article_alias = #{articleAlias,jdbcType=VARCHAR},
       article_title = #{articleTitle,jdbcType=VARCHAR},
