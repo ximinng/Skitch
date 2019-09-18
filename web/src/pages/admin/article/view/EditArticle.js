@@ -8,7 +8,7 @@ import {Form, Select, Radio, Button, Input} from 'antd';
 const {Option} = Select;
 const {TextArea} = Input;
 
-class NewArticle extends PureComponent {
+class EditArticle extends PureComponent {
 
     render() {
         const {getFieldDecorator} = this.props.form;
@@ -29,7 +29,7 @@ class NewArticle extends PureComponent {
                 ) : (
                     <Form {...formItemLayout} onSubmit={(e) => handleSubmit(e, this.props.form)}>
                         <Form.Item label="Task">
-                            <span className="ant-form-text">新建文章</span>
+                            <span className="ant-form-text">编辑文章</span>
                         </Form.Item>
                         <Form.Item {...formItemLayout} label="文章标题">
                             {getFieldDecorator('articleTitle', {
@@ -124,7 +124,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     // 填充表单分类和标签数据
     fillInForm() {
-        dispatch(actions.fillInFormWithLabelAndSort())
+        // dispatch(actions.fillInFormWithLabelAndSort())
     },
     // 提交创建文章
     handleSubmit(e, form) {
@@ -132,10 +132,10 @@ const mapDispatchToProps = (dispatch) => ({
         form.validateFields((err, values) => {
             if (!err) {
                 // console.log(values);
-                dispatch(actions.createArticle(values));
+                // dispatch(actions.createArticle(values));
             }
         });
     }
 });
 
-export default Form.create({name: 'new_article'})(connect(mapStateToProps, mapDispatchToProps)(NewArticle));
+export default Form.create({name: 'edit_article'})(connect(mapStateToProps, mapDispatchToProps)(EditArticle));

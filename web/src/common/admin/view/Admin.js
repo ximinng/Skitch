@@ -1,7 +1,9 @@
 import React from 'react';
 import {Route, Link} from "react-router-dom";
 import {view as Home} from "../../../pages/admin/home";
-import {view as NewArticle} from "../../../pages/admin/article";
+import {NewArticle} from "../../../pages/admin/article";
+import {EditArticle} from "../../../pages/admin/article";
+import {Articles} from "../../../pages/admin/article";
 
 import {Layout, Menu, Icon} from 'antd';
 import './style.css';
@@ -36,7 +38,12 @@ function Admin({match}) {
                             <Menu.Item key="1">
                                 <Link to={`${match.path}/newArticle`}>新建文章</Link>
                             </Menu.Item>
-                            <Menu.Item key="2">编辑文章</Menu.Item>
+                            <Menu.Item key="2">
+                                <Link to={`${match.path}/editArticle`}>编辑文章</Link>
+                            </Menu.Item>
+                            <Menu.Item key="3">
+                                <Link to={`${match.path}/articles`}>文章列表</Link>
+                            </Menu.Item>
                         </SubMenu>
                         <SubMenu key="sub2" title={
                             <span><Icon type="laptop"/>标签管理</span>
@@ -79,6 +86,8 @@ function Admin({match}) {
                     >
                         <Route path={`${match.path}`} exact component={Home}/>
                         <Route path={`${match.path}/newArticle`} component={NewArticle}/>
+                        <Route path={`${match.path}/editArticle`} component={EditArticle}/>
+                        <Route path={`${match.path}/articles`} component={Articles}/>
                     </Content>
                 </Layout>
             </Layout>

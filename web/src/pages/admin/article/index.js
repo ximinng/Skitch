@@ -1,4 +1,6 @@
 import reducer from './reducer';
-import view from './loadable';
+import EditArticle from './view/EditArticle';
+import NewArticle from './view/NewArticle';
+import Articles from './view/Articles';
 
-export {reducer, view}
+export {reducer, EditArticle, NewArticle,Articles}
