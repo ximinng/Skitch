@@ -5,12 +5,12 @@ const defaultState = fromJS({
     labelItems: [],
     sortItems: [],
     msg: '',
-    redirect: false
+    redirect: false,
 });
 
 export default (state = defaultState, action) => {
     switch (action.type) {
-        case actionTypes.GET_BEFORE_ARTICLE_INFOS:
+        case actionTypes.FILL_IN_FORMS:
             return state.merge({
                 labelItems: state.get('labelItems').concat(fromJS(action.labelItems)),
                 sortItems: state.get('sortItems').concat(fromJS(action.sortItems)),

@@ -3,7 +3,7 @@ import * as actionTypes from './actionTypes';
 import * as Constants from '../../../common/Constants';
 
 const requestLabelAndSortInfos = (labelItems, sortItems, msg) => ({
-    type: actionTypes.GET_BEFORE_ARTICLE_INFOS,
+    type: actionTypes.FILL_IN_FORMS,
     labelItems,
     sortItems,
     msg
@@ -40,7 +40,7 @@ export const fillInFormWithLabelAndSort = () => {
     }
 };
 
-const handleRedirect = (redirect) => ({
+const handleCreateArticle = (redirect) => ({
     type: actionTypes.HANDLE_REDIRECT,
     redirect
 });
@@ -61,12 +61,11 @@ export const createArticle = (values) => {
                 articleStatus: values.articleStatus
             }
         ).then(function (response) {
-            console.log(response.data);
-            dispatch(handleRedirect(true))
-            // status msg
+            // console.log(response.data); // status msg
+            dispatch(handleCreateArticle(true))
         }).catch(function (error) {
             console.log(error.data);
-            dispatch(handleRedirect(false))
+            dispatch(handleCreateArticle(false))
         });
     }
 };

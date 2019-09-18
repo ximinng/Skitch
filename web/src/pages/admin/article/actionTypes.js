@@ -1,3 +1,2 @@
-export const GET_BEFORE_ARTICLE_INFOS = 'admin/GET_BEFORE_ARTICLE_INFOS';
+export const FILL_IN_FORMS = 'admin/FILL_IN_FORMS';
 export const HANDLE_REDIRECT = 'admin/HANDLE_REDIRECT';
-export const HANDLE_ERROR = 'admin/HANDLE_ERROR';
