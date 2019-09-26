@@ -15,6 +15,11 @@
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ximingxing.blog.server.pojo.Article">
         <result column="article_content" jdbcType="LONGVARCHAR" property="articleContent"/>
     </resultMap>
+    <resultMap id="AdminResultMap" type="com.ximingxing.blog.server.pojo.Article">
+        <id column="article_id" jdbcType="INTEGER" property="articleId"/>
+        <result column="article_alias" jdbcType="VARCHAR" property="articleAlias"/>
+        <result column="article_title" jdbcType="VARCHAR" property="articleTitle"/>
+    </resultMap>
     <sql id="Base_Column_List">
     article_id, article_alias, article_title, article_sort, article_views, article_comments, 
     article_status, create_time, update_time
@@ -22,6 +27,9 @@
     <sql id="Blob_Column_List">
     article_content
   </sql>
+    <sql id="Id_Alias_Title_List">
+    article_id, article_alias, article_title
+    </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
@@ -29,6 +37,11 @@
         <include refid="Blob_Column_List"/>
         from blog_article
         where article_id = #{articleId,jdbcType=INTEGER}
+    </select>
+    <select id="selectAllAbstract" resultMap="AdminResultMap" resultType="com.ximingxing.blog.server.pojo.Article">
+        select
+        <include refid="Id_Alias_Title_List"/>
+        from blog_article
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from blog_article

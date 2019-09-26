@@ -6,10 +6,18 @@ const defaultState = fromJS({
     sortItems: [],
     msg: '',
     redirect: false,
+    Articles: [],
+    fields: "123"
 });
 
 export default (state = defaultState, action) => {
     switch (action.type) {
+        case actionTypes.FORM_CHANGE:
+            return state.set('fields', fromJS(action.changedFields));
+        case actionTypes.SET_ARTICLE:
+            return state.set('article', (action.article));
+        case actionTypes.SET_ARTICLES:
+            return state.set('articles', action.articles);
         case actionTypes.FILL_IN_FORMS:
             return state.merge({
                 labelItems: state.get('labelItems').concat(fromJS(action.labelItems)),

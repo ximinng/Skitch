@@ -17,10 +17,12 @@ class NewArticle extends PureComponent {
             wrapperCol: {span: 14},
         };
         const {
+            match,
             labelItems, sortItems, msg,
             handleSubmit,
             redirect
         } = this.props;
+        const action = match.params.action;
 
         return (
             <Route path="/" render={() => (
@@ -28,18 +30,29 @@ class NewArticle extends PureComponent {
                     <Redirect to={'/admin'}/>
                 ) : (
                     <Form {...formItemLayout} onSubmit={(e) => handleSubmit(e, this.props.form)}>
+                        {/*{console.log(this.props.article)}*/}
                         <Form.Item label="Task">
-                            <span className="ant-form-text">新建文章</span>
+                            {
+                                action === 'edit'
+                                    ? <span className="ant-form-text">编辑文章</span>
+                                    : (action === 'new' ? <span className="ant-form-text">新建文章</span> :
+                                    <span className="ant-form-text">未知任务</span>)
+                            }
                         </Form.Item>
                         <Form.Item {...formItemLayout} label="文章标题">
-                            {getFieldDecorator('articleTitle', {
-                                rules: [
-                                    {
-                                        required: true,
-                                        message: '请输入文章标题!',
-                                    },
-                                ],
-                            })(<Input placeholder="请输入文章标题"/>)}
+                            <div>
+                                {
+                                    getFieldDecorator('articleTitle', {
+                                        rules: [
+                                            {
+                                                required: true,
+                                                message: '请输入文章标题!',
+                                            },
+                                        ],
+                                        initialValue: ''
+                                    })(<Input placeholder="请输入文章标题"/>)
+                                }
+                            </div>
                         </Form.Item>
                         <Form.Item {...formItemLayout} label="访问URL">
                             {getFieldDecorator('articleAlias', {
@@ -110,7 +123,8 @@ class NewArticle extends PureComponent {
     }
 
     componentDidMount() {
-        this.props.fillInForm()
+        console.log(this.props.match, this.props.match.params.action); // url动态参数
+        this.props.fillInForm(this.props.match.params.action, this.props.match.params.id);
     }
 }
 
@@ -118,13 +132,16 @@ const mapStateToProps = (state) => ({
     labelItems: state.getIn(['adminArticle', 'labelItems']),
     sortItems: state.getIn(['adminArticle', 'sortItems']),
     msg: state.getIn(['adminArticle', 'msg']),
-    redirect: state.getIn(['adminArticle', 'redirect'])
+    redirect: state.getIn(['adminArticle', 'redirect']),
+    article: state.getIn(['adminArticle', 'article'])
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    // 填充表单分类和标签数据
-    fillInForm() {
-        dispatch(actions.fillInFormWithLabelAndSort())
+    fillInForm(action, id) {
+        // 填充表单分类和标签数据
+        if (action === 'new') dispatch(actions.fillInFormWithLabelAndSort());
+        // 根据文章id获得文章信息
+        if (action === 'edit') dispatch(actions.fillInFormById(id));
     },
     // 提交创建文章
     handleSubmit(e, form) {
@@ -138,4 +155,13 @@ const mapDispatchToProps = (dispatch) => ({
     }
 });
 
-export default Form.create({name: 'new_article'})(connect(mapStateToProps, mapDispatchToProps)(NewArticle));
+export default Form.create({
+    name: 'new_article', mapPropsToFields(props) {
+        console.log(props);
+        return props.article ? {
+            articleTitle: Form.createFormField({
+                articleTitle: props.article.articleTitle
+            })
+        } : {}
+    }
+})(connect(mapStateToProps, mapDispatchToProps)(NewArticle));

@@ -1,6 +1,7 @@
 package com.ximingxing.blog.server.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.Serializable;
@@ -8,11 +9,12 @@ import java.io.Serializable;
 /**
  * 高复用服务响应对象
  */
-@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL) // 剔除json中的空数据
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ServerResponse<T> implements Serializable {
 
     private int status; // 状态码
     private String msg; // 信息
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private T data;     // 数据
 
     private ServerResponse(int status) {

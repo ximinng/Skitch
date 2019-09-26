@@ -1,6 +1,7 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
 import * as Constants from '../../../common/Constants';
+import Qs from 'qs';
 
 const requestLabelAndSortInfos = (labelItems, sortItems, msg) => ({
     type: actionTypes.FILL_IN_FORMS,
@@ -15,17 +16,17 @@ const requestLabelAndSortInfos = (labelItems, sortItems, msg) => ({
 export const fillInFormWithLabelAndSort = () => {
     return (dispatch) => {
         axios.get('http://localhost:8080/admin/article').then((res) => {
-                const data = res.data;
+                const response = res.data;
                 const labelItems = [];
                 const sortItems = [];
                 const msg = res.data.msg;
 
-                if (data.status.toString() === Constants.SUCCESS) {
-                    const labels = data.data.labels;
+                if (response.status.toString() === Constants.SUCCESS) {
+                    const labels = response.data.labels;
                     labels.map((item) => {
                         labelItems.push([item.labelId, item.labelName]);
                     });
-                    const sorts = data.data.sorts;
+                    const sorts = response.data.sorts;
                     sorts.map((item) => {
                         sortItems.push([item.sortId, item.sortName]);
                     });
@@ -51,12 +52,21 @@ const handleCreateArticle = (redirect) => ({
  */
 export const createArticle = (values) => {
     return (dispatch) => {
-        // console.log('Received values of form: ', values);
+        // 组装label
+        const newLabels = [];
+        values.labels.map((item) => {
+            newLabels.push({
+                labelId: item
+            })
+        });
+
         axios.post('http://localhost:8080/admin/article', {
                 articleTitle: values.articleTitle,
                 articleAlias: values.articleAlias,
-                sort: values.sort,
-                labels: values.labels,
+                sort: {
+                    sortId: values.sorts
+                },
+                labels: newLabels,
                 articleContent: values.articleContent,
                 articleStatus: values.articleStatus
             }
@@ -67,5 +77,66 @@ export const createArticle = (values) => {
             console.log(error.data);
             dispatch(handleCreateArticle(false))
         });
+    }
+};
+
+const getArticles = (articles) => ({
+    type: actionTypes.SET_ARTICLES,
+    articles
+});
+
+/**
+ * 请求所有文章信息 --- id title alias
+ * @returns {Function}
+ */
+export const requestArticles = () => {
+    return (dispatch) => {
+        axios.get('http://localhost:8080/admin/articles').then((res) => {
+            const response = res.data;
+            const values = [];
+
+            if (response.status.toString() === Constants.SUCCESS) {
+                response.data.map((item) => {
+                    values.push(item);
+                });
+                dispatch(getArticles(values));
+            } else if (response.status.toString() === Constants.ERROR) {
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+};
+
+const setArticle = (article) => ({
+    type: actionTypes.SET_ARTICLE,
+    article
+});
+
+/**
+ * 根据文章id查询文章信息
+ * @param id
+ */
+export const fillInFormById = (id) => {
+    return (dispatch) => {
+        axios.get(`http://localhost:8080/admin/article/${id}`).then((res) => {
+            const response = res.data;
+            if (response.status.toString() === Constants.SUCCESS) {
+                console.log(response.data);
+                dispatch(setArticle(response.data));
+            } else if (response.status.toString === Constants.ERROR) {
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+};
+
+export const formChange = (changedFields) => {
+    return (dispatch) => {
+        dispatch({
+            type: actionTypes.FORM_CHANGE,
+            changedFields
+        })
     }
 };

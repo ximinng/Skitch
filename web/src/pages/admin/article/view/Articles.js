@@ -1,20 +1,9 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import {Redirect, Route} from "react-router-dom";
+import {Link} from "react-router-dom";
 import * as actions from '../actions';
 
-import {Form, Select, Input, List, Icon, Button} from 'antd';
-
-const {Option} = Select;
-const {TextArea} = Input;
-
-const listData = [];
-for (let i = 0; i < 23; i++) {
-    listData.push({
-        href: 'http://ant.design',
-        title: `ant design part ${i}`
-    });
-}
+import {Form, List, Icon, Button} from 'antd';
 
 const IconText = ({type, text}) => (
     <span>
@@ -25,11 +14,7 @@ const IconText = ({type, text}) => (
 class Articles extends PureComponent {
 
     render() {
-        const {
-            labelItems, sortItems, msg,
-            handleSubmit,
-            redirect
-        } = this.props;
+        const {articles} = this.props;
 
         return (
             <List
@@ -41,29 +26,34 @@ class Articles extends PureComponent {
                     },
                     pageSize: 6,
                 }}
-                dataSource={listData}
+                dataSource={articles}
                 header={
                     <div>
                         <b>文章列表</b>
                     </div>
                 }
-                renderItem={item => (
+                renderItem={(item) => (
                     <List.Item
-                        key={item.title}
+                        key={item.articleId}
                         extra={
                             <div>
                                 <Button type="primary">
-                                    <IconText type="edit" text="edit"/>
+                                    <Link to={`admin/article/edit/${item.articleId}`}>
+                                        <IconText type="edit" text="编辑"/>
+                                    </Link>
                                 </Button>
                                 &nbsp;
                                 <Button type="dashed">
-                                    <IconText type="more" text="more"/>
+                                    <IconText type="more" text="详情"/>
                                 </Button>
                             </div>
                         }
                     >
+                        {
+                            console.log(item)
+                        }
                         <List.Item.Meta
-                            title={<a href={item.href}>{item.title}</a>}
+                            title={item.articleTitle}
                         />
                     </List.Item>
                 )}
@@ -72,21 +62,18 @@ class Articles extends PureComponent {
     }
 
     componentDidMount() {
-        this.props.fillInLists()
+        this.props.fillInLists();
     }
 }
 
 const mapStateToProps = (state) => ({
-    labelItems: state.getIn(['adminArticle', 'labelItems']),
-    sortItems: state.getIn(['adminArticle', 'sortItems']),
-    msg: state.getIn(['adminArticle', 'msg']),
-    redirect: state.getIn(['adminArticle', 'redirect'])
+    articles: state.getIn(['adminArticle', 'articles']),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    // 填充表单分类和标签数据
+    // 获取所有文章信息
     fillInLists() {
-        // dispatch(actions.fillInFormWithLabelAndSort())
+        dispatch(actions.requestArticles());
     }
 });
 

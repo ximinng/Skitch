@@ -1,8 +1,7 @@
 import React from 'react';
 import {Route, Link} from "react-router-dom";
 import {view as Home} from "../../../pages/admin/home";
-import {NewArticle} from "../../../pages/admin/article";
-import {EditArticle} from "../../../pages/admin/article";
+import {Article} from "../../../pages/admin/article";
 import {Articles} from "../../../pages/admin/article";
 
 import {Layout, Menu, Icon} from 'antd';
@@ -85,8 +84,8 @@ function Admin({match}) {
                         }}
                     >
                         <Route path={`${match.path}`} exact component={Home}/>
-                        <Route path={`${match.path}/newArticle`} component={NewArticle}/>
-                        <Route path={`${match.path}/editArticle`} component={EditArticle}/>
+                        <Route path={`${match.path}/article/:action`} exact component={Article}/>
+                        <Route path={`${match.path}/article/:action/:id`} component={Article}/>
                         <Route path={`${match.path}/articles`} component={Articles}/>
                     </Content>
                 </Layout>

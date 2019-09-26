@@ -1,4 +1,4 @@
-package com.ximingxing.blog.server.service.impl;
+package com.ximingxing.blog.server.service.impl.admin;
 
 import com.ximingxing.blog.server.common.ResponseCode;
 import com.ximingxing.blog.server.common.ServerResponse;
@@ -10,14 +10,18 @@ import com.ximingxing.blog.server.pojo.Article;
 import com.ximingxing.blog.server.pojo.ArticleWithLabelsKey;
 import com.ximingxing.blog.server.pojo.Label;
 import com.ximingxing.blog.server.pojo.Sort;
-import com.ximingxing.blog.server.service.IArticleService;
+import com.ximingxing.blog.server.service.admin.IArticleService;
 import com.ximingxing.blog.server.vo.BeforeNewArticleVo;
 import com.ximingxing.blog.server.vo.NewArticleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -36,7 +40,45 @@ public class IArticleServiceImpl implements IArticleService {
     private ArticleWithLabelsMapper setArticleLabelMapper;
 
     @Override
-    public ServerResponse<BeforeNewArticleVo> FillInForm() {
+    public ServerResponse<NewArticleVo> getArticle(Integer id) {
+        Article article = articleMapper.selectByPrimaryKey(id);
+        if (article == null) {
+            return ServerResponse.createByError("文章不存在");
+        }
+
+        // 组装 labels
+        List<Integer> labelIds = setArticleLabelMapper.selectLabelIdsByArticleId(article.getArticleId());
+
+        ArrayList<Label> labels = new ArrayList<>();
+        for (Integer labelId : labelIds) {
+            labels.add(labelMapper.selectByPrimaryKey(labelId));
+        }
+
+        // 组装 sort
+        Sort sort = sortMapper.selectByPrimaryKey(article.getArticleSort());
+
+        NewArticleVo articleVo = new NewArticleVo(
+                article.getArticleTitle(),
+                article.getArticleAlias(),
+                sort,
+                labels,
+                article.getArticleContent(),
+                article.getArticleStatus()
+        );
+        return ServerResponse.createBySuccess(articleVo);
+    }
+
+    @Override
+    public ServerResponse<List<Article>> getArticles() {
+        List<Article> articles = articleMapper.selectAllAbstract();
+        if (CollectionUtils.isEmpty(articles)) {
+            return ServerResponse.createByError("没有文章信息");
+        }
+        return ServerResponse.createBySuccess(articles);
+    }
+
+    @Override
+    public ServerResponse<BeforeNewArticleVo> fillInForm() {
         List<Label> labels = labelMapper.selectAll();
         List<Sort> sorts = sortMapper.selectAll();
 
@@ -51,9 +93,12 @@ public class IArticleServiceImpl implements IArticleService {
     }
 
     @Override
+    @Transactional
     public ServerResponse<String> createNewArticle(NewArticleVo article) {
         Article record = new Article(null,
-                article.getArticleAlias(), article.getArticleTitle(), article.getSort(),
+                article.getArticleAlias(),
+                article.getArticleTitle(),
+                article.getSort().getSortId(),
                 0, 0,
                 article.getArticleStatus() == null ? 1 : article.getArticleStatus(),
                 new Date(), null,
@@ -62,12 +107,11 @@ public class IArticleServiceImpl implements IArticleService {
         int articleRes = articleMapper.insertSelectiveAndReturnKey(record);
         if (articleRes > 0) {
             // 设置标签和文章关系
-            for (Integer label : article.getLabels()) {
-                setArticleLabelMapper.insertSelective(new ArticleWithLabelsKey(record.getArticleId(), label));
+            for (Label label : article.getLabels()) {
+                setArticleLabelMapper.insertSelective(new ArticleWithLabelsKey(record.getArticleId(), label.getLabelId()));
             }
             return ServerResponse.createBySuccess("文章创建成功!");
-        } else {
-            return ServerResponse.createByError(ResponseCode.ERROR.getCode(), "文章创建失败!");
         }
+        return ServerResponse.createByError(ResponseCode.ERROR.getCode(), "文章创建失败!");
     }
 }
