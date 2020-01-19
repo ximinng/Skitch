@@ -1,0 +1,2 @@
+$ minikube list
+$ kubectl port-forward service/blog-app-server 8080:8080

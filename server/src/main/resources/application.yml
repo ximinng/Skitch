@@ -1,7 +1,0 @@
-server:
-  port: 8080
-
-spring:
-  # 环境 dev|test|prod
-  profiles:
-    active: dev

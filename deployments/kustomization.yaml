@@ -1,0 +1,17 @@
+# The secrets file should not be checked into Git. It's published only for demonstration purpose.
+secretGenerator:
+- name: mysql-root-pass
+  literals:
+  - password=R00t
+- name: mysql-user-pass
+  literals:
+  - username=callicoder
+  - password=c@ll1c0d3r 
+- name: mysql-db-url
+  literals:
+  - database=blogs
+  - url=jdbc:mysql://blog-app-mysql:3306/blogs?useSSL=false
+resources:
+  - mysql-deployment.yaml
+  - blog-app-server.yaml
+  - blog-app-client.yaml  
