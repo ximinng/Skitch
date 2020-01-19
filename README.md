@@ -1,6 +1,6 @@
-# Springboot-Scaffolding-Project
+# Reboot-Blog
 
-This is a scaffolding project: **Full Stack App built using Nginx, Spring Boot, Spring Security, JWT, React, and Ant Design.Finally deploy with Docker.**
+This is blog  project: **Full Stack App built using Nginx, Spring Boot, Spring Security, JWT, React, and Ant Design.Finally deploy with Docker.**
 
 ## Steps to Setup the Spring Boot Back end app (blog-app-server)
 
