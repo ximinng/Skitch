@@ -1,14 +1,14 @@
-# Reboot-Blog
+# Skitch Blog
 
-This is blog  project: **Full Stack App built using Nginx, Spring Boot, Spring Security, JWT, React, and Ant Design.Finally deploy with Docker.**
+This is blog project: **Full Stack App built using Nginx, Spring Boot, Spring Security, JWT, React, and Ant Design.Finally deploy with Docker.**
 
 ## Steps to Setup the Spring Boot Back end app (blog-app-server)
 
 1. **Clone the application**
 
 	```bash
-	git clone https://github.com/ximingxing/App-Scaffolding-Project.git
-	cd App-Scaffolding-Project
+	git clone https://github.com/ximingxing/Skitch.git
+	cd Skitch
 	```
 
 2. **Create MySQL database**
