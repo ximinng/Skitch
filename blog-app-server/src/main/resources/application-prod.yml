@@ -2,14 +2,14 @@ spring:
   jackson:
     default-property-inclusion: non_null # 剔除JSON中的空数据
   datasource:
-    url: jdbc:mysql://10.103.252.7:3306/intermediate_defense_system?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/blogs?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&&useSSL=false
     username: root
     password: IyM9FkXb
     driver-class-name: com.mysql.cj.jdbc.Driver
     # 配置数据库信息
     type: com.alibaba.druid.pool.DruidDataSource
 
-    # 使用 druid 作为连接池  更多配置的说明可以参见 druid starter 中文文档 https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
+    # 使用 druid 作为连接池 更多配置的说明可以参见 druid starter 中文文档 https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
     druid:
       # 初始化时建立物理连接的个数。初始化发生在显示调用init方法，或者第一次getConnection时
       initialSize: 10
@@ -92,7 +92,11 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
 
+# Logback
 logging:
-  file: ids.log
+  file: blog-app-server.log
   level:
-    root: info
+    root: WARN
+    org:
+      springframework:
+        security: DEBUG
