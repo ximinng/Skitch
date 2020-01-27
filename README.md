@@ -43,7 +43,7 @@ This is blog project: **Full Stack App built using Nginx, Spring Boot, Spring Se
 	
 	The spring boot app uses role based authorization powered by spring security. To add the default roles in the database, I have added the following sql queries in `src/main/resources/data.sql` file.
 
-## Steps to Setup the React Front end app (polling-app-client)
+## Steps to Setup the React Front end app (blog-app-client)
 
 First go to the `blog-app-client` folder -
 
@@ -58,3 +58,12 @@ npm install && npm start
 ```
 
 The front-end server will start on port `3000`.
+
+## Design
+
+1. user 用户
+2. article 文章
+3. sort 文章分类
+4. label 文章标签
+5. comment 评论
+6. site 网站

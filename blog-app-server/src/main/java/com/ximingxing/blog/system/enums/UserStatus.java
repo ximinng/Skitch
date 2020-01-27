@@ -2,10 +2,11 @@ package com.ximingxing.blog.system.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-/**
- * @author shuang.kou
- */
 
+/**
+ * Description: 用户状态
+ * Created By xxm
+ */
 public enum UserStatus {
     CAN_USE("can use in system"),
     CAN_NOT_USE("can not use in system");
@@ -22,11 +23,8 @@ public enum UserStatus {
 
     @JsonCreator
     public static UserStatus fromRole(String status) {
-        for (UserStatus type : UserStatus.values()) {
-            if (type.getName().equals(status)) {
-                return type;
-            }
-        }
+        for (UserStatus type : UserStatus.values())
+            if (type.getName().equals(status)) return type;
         return null;
     }
 }
