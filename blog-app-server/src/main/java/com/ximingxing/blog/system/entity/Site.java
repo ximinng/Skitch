@@ -7,9 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
+ * <p>
  * Description: 网站配置实体
- * 1. Power By
- * 2. This is code by
+ * 1. 网站备案号
+ * 2. 网站基础信息
+ * </p>
  * Created By xxm
  */
 @Data
