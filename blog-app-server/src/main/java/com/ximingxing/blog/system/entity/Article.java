@@ -1,5 +1,6 @@
 package com.ximingxing.blog.system.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.Set;
  * Created By xxm
  */
 @Data
+@Builder
 @Entity
 @Table(name = "s_article")
 public class Article {
@@ -40,9 +42,10 @@ public class Article {
     private Date updateTime; // 文章最后修改时间
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "sort_id", referencedColumnName = "article_id")
+    @JoinColumn(name = "sort_id")
     private Sort sort; // 文章分类
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "s_article")
+    @OneToMany(cascade = CascadeType.ALL)
+    @OrderBy("label_name DESC")
     private Set<Label> Labels; // 文章标签
 }

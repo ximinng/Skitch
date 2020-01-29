@@ -2,14 +2,14 @@ spring:
   jackson:
     default-property-inclusion: non_null # 剔除JSON中的空数据
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/blogs?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/blogs?characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
-    password: IyM9FkXb
+    password: callicoder
     driver-class-name: com.mysql.cj.jdbc.Driver
     # 配置数据库信息
     type: com.alibaba.druid.pool.DruidDataSource
 
-    # 使用 druid 作为连接池 更多配置的说明可以参见 druid starter 中文文档 https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
+    # 使用 druid 作为连接池  更多配置的说明可以参见 druid starter 中文文档 https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
     druid:
       # 初始化时建立物理连接的个数。初始化发生在显示调用init方法，或者第一次getConnection时
       initialSize: 10
@@ -32,7 +32,7 @@ spring:
       # 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。
       testOnReturn: false
       # 是否自动回收超时连接
-      removeAbandoned: true
+      removeAbandoned: false
       # 超时时间(以秒数为单位)
       remove-abandoned-timeout: 180
 
@@ -60,37 +60,14 @@ spring:
         reset-enable: true
         login-username: druid
         login-password: druid
-
-  #邮件服务器的配置
-  mail:
-    host: smtp.exmail.qq.com
-    port: 25
-    username: XXXX@bupt.edu.cn
-    password: //此处为授权码
-    default-encoding: UTF-8
-
-# mybatis 相关配置
-mybatis:
-  configuration:
-    # 当没有为参数提供特定的 JDBC 类型时，为空值指定 JDBC 类型。
-    # oracle数据库建议配置为JdbcType.NULL, 默认是Other
-    jdbc-type-for-null: 'null'
-    # 是否打印sql语句 调试的时候可以开启
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  type-aliases-package: com.ximingxing.blog.server.pojo
-  mapper-locations: classpath:mappers/*.xml
-
-mapper:
-  mappers:
-    - tk.mybatis.springboot.util.MyMapper
-  not-empty: false
-  identity: MYSQL
-
-pagehelper:
-  helperDialect: mysql
-  reasonable: true
-  supportMethodsArguments: true
-  params: count=countSql
+  # Hibernate Properties
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+    database-platform:  org.hibernate.dialect.MySQLDialect
 
 # Logback
 logging:
