@@ -1,18 +1,20 @@
 package com.ximingxing.blog.system.entity;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Description: 文章实体
  * Created By xxm
  */
 @Data
-@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "s_article")
 public class Article {
@@ -45,7 +47,7 @@ public class Article {
     @JoinColumn(name = "sort_id")
     private Sort sort; // 文章分类
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @OrderBy("label_name DESC")
-    private Set<Label> Labels; // 文章标签
+    private List<Label> labels; // 文章标签
 }

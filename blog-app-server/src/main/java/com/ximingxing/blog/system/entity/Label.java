@@ -1,6 +1,8 @@
 package com.ximingxing.blog.system.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -9,6 +11,8 @@ import javax.persistence.*;
  * Created By xxm
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "s_label")
 public class Label {
@@ -21,7 +25,7 @@ public class Label {
     @Column(name = "label_name", nullable = false, length = 50)
     private String labelName; // 标签名称
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "article_id")
-    private Article article;
+//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "article_id")
+//    private Article article;
 }
