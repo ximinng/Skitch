@@ -12,7 +12,7 @@ import java.util.Date;
 import static org.junit.Assert.*;
 
 /**
- * Description:
+ * Description: ArticleRepository Test
  * Created By xxm
  */
 @RunWith(SpringRunner.class)

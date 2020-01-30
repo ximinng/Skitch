@@ -23,7 +23,4 @@ public class Sort {
 
     @Column(name = "parent_id", nullable = false)
     private Integer parentId; // 父分类ID
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private Article article;
 }

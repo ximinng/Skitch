@@ -66,4 +66,4 @@ The front-end server will start on port `3000`.
 3. sort 文章分类
 4. label 文章标签
 5. comment 评论
-6. site 网站
+6. site 网站配置

@@ -62,11 +62,15 @@ spring:
         login-password: druid
   # Hibernate Properties
   jpa:
-    database: mysql
+    database: MYSQL
     hibernate:
       ddl-auto: update
     show-sql: true
     open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
 
 # Logback
 logging:
