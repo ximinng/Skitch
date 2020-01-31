@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,6 +44,25 @@ public class SortRepositoryTest {
         sortRepository.save(sort2);
     }
 
+    /**
+     * 递归查询分类归属
+     *
+     * @param id       调用前确保id存在
+     * @param sortList 小分类 -> 大分类,顺序存储
+     * @return sortList
+     */
+    public List<Optional<Sort>> getSortByRecursion(Integer id, List<Optional<Sort>> sortList) {
+        Optional<Sort> curSort = sortRepository.findSortBySortId(id);
+        sortList.add(curSort);
+        // curSort不存在存在或者sortId等于parentId
+        if (curSort.isPresent() && (curSort.get().getParentId().equals(curSort.get().getSortId()))) {
+            return sortList;
+        } else {
+            id = curSort.get().getParentId();
+            return getSortByRecursion(id, sortList);
+        }
+    }
+
     @Test
     public void findSortRecursionMethodTest() {
         // 给定分类名称查询父分类
@@ -51,9 +71,9 @@ public class SortRepositoryTest {
         Integer sortId = sortOption.get().getSortId();
 
         // 递归查询父分类
-        while (sortId != null) {
-            Optional<Sort> sortBySortId = sortRepository.findSortBySortId(sortId);
-        }
+        List<Optional<Sort>> sortByRecursion = getSortByRecursion(sortId, new LinkedList<>());
+
+        System.out.println(sortByRecursion);
     }
 
     @Test
