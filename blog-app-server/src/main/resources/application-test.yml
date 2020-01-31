@@ -72,7 +72,11 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
 
+# Logback
 logging:
-  file: ids-test.log
+  file: blog-app-server.log
   level:
-    root: info
+    root: WARN
+    org:
+      springframework:
+        security: DEBUG

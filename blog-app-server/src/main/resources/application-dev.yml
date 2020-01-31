@@ -73,10 +73,10 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
 
 # Logback
-logging:
-  file: blog-app-server.log
-  level:
-    root: WARN
-    org:
-      springframework:
-        security: DEBUG
+#logging:
+#  file: blog-app-server.log
+#  level:
+#    root: WARN
+#    org:
+#      springframework:
+#        security: DEBUG
