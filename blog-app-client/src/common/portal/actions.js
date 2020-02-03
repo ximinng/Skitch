@@ -1,17 +1,21 @@
-// import axios from 'axios';
-// import * as actionTypes from './actionTypes';
+import axios from 'axios';
+import * as actionTypes from './actionTypes';
 
-// const changeDetail = (title, content) => ({
-//     type: actionTypes.CHANGE_DETAIL,
-//     title,
-//     content
-// });
+const _getSiteFooterDesc = (title, content) => ({
+    type: actionTypes.GET_SITE_FOOTER_DESC,
+    title,
+    content
+});
 
-// export const getDetail = (id) => {
-//     return (dispatch) => {
-//         axios.get('/api/detail.json?id' + id).then((res) => {
-//             const result = res.data.data;
-//             dispatch(changeDetail(result.title, result.content));
-//         })
-//     }
-// };
+/**
+ * 获取网站描述信息.
+ * @returns {Function}
+ */
+export const getSiteFooterDesc = () => {
+    return (dispatch) => {
+        axios.get('').then((res) => {
+            const result = res.data.data;
+            dispatch(_getSiteFooterDesc(result.title, result.content));
+        })
+    }
+};

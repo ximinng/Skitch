@@ -1,0 +1,1 @@
+export const GET_SITE_FOOTER_DESC = 'portal/GET_SITE_FOOTER_DESC';
