@@ -1,8 +1,7 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
-import {Form, Icon, Input, Button, Checkbox, Layout} from 'antd';
+import {Form, Icon, Input, Button, Checkbox, Row, Col} from 'antd';
 import './style.css';
-
 
 class Container extends PureComponent {
     handleSubmit = e => {
@@ -16,12 +15,11 @@ class Container extends PureComponent {
 
     render() {
         const {getFieldDecorator} = this.props.form;
-        const {Header, Footer, Content} = Layout;
 
         return (
-            <Layout>
-                <Header>Header</Header>
-                <Content>
+            <Row>
+                <Col span={8} xs={2}/>
+                <Col span={8} xs={20}>
                     <Form onSubmit={this.handleSubmit} className="login-form">
                         <Form.Item>
                             {getFieldDecorator('username', {
@@ -58,9 +56,9 @@ class Container extends PureComponent {
                             Or <a href="">register now!</a>
                         </Form.Item>
                     </Form>
-                </Content>
-                <Footer>Footer</Footer>
-            </Layout>
+                </Col>
+                <Col span={8} xs={2}/>
+            </Row>
         );
     }
 }
