@@ -5,6 +5,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import {view as Portal} from './common/portal';
 import {view as Admin} from './common/admin';
+import {view as Login} from './pages/login';
 
 class App extends Component {
     render() {
@@ -14,6 +15,7 @@ class App extends Component {
                     <Fragment>
                         <Switch>
                             <Route path={'/home'} component={(props) => <Portal {...props}/>}/>
+                            <Route path={'/login'} component={(props) => <Login {...props}/>}/>
                             <Route path={'/admin'} component={(props) => <Admin {...props}/>}/>
                             <Route component={(props) => <Portal {...props}/>}/>
                         </Switch>
