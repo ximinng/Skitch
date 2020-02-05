@@ -14,7 +14,7 @@ function Loading(props) {
 }
 
 const LoadableComponent = Loadable({
-    loader: () => import('./view/Container'),
+    loader: () => import('./view/Login'),
     loading: Loading,
     delay: 3000, // 0.3 seconds
 });

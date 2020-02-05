@@ -1,17 +1,24 @@
-// import axios from 'axios';
-// import * as actionTypes from './actionTypes';
-//
-// const changeDetail = (title, content) => ({
-//     type: actionTypes.CHANGE_DETAIL,
-//     title,
-//     content
-// });
-//
-// export const getDetail = (id) => {
-//     return (dispatch) => {
-//         axios.get('/api/detail.json?id' + id).then((res) => {
-//             const result = res.data.data;
-//             dispatch(changeDetail(result.title, result.content));
-//         })
-//     }
-// };
+import {auth} from '../../common/request';
+import * as actionTypes from './actionTypes';
+
+const loginSuccess = (token) => ({
+    type: actionTypes.LOGIN,
+    token,
+    isLogin: true
+});
+
+export const userLoginAction = (user) => {
+    return (dispatch) => {
+        const data = {
+            "username": user.username,
+            "password": user.password,
+            "rememberMe": user.remember
+        };
+        auth.post('/login', data).then((res) => {
+            console.log(res);
+            console.log(res.headers.authorization);
+
+            dispatch(loginSuccess(res.headers.authorization));
+        });
+    }
+};

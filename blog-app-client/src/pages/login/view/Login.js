@@ -1,20 +1,23 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {Form, Icon, Input, Button, Checkbox, Row, Col} from 'antd';
+import * as actions from '../actions';
 import './style.css';
 
-class Container extends PureComponent {
+class Login extends PureComponent {
+    /*处理表单提交*/
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
+                this.props.userLogin(values)
             }
         });
     };
 
     render() {
-        const {getFieldDecorator} = this.props.form;
+        const {getFieldDecorator} = this.props.form; // 表单域校验
 
         return (
             <Row>
@@ -65,6 +68,10 @@ class Container extends PureComponent {
 
 const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+    userLogin(user) {
+        dispatch(actions.userLoginAction(user))
+    }
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(Container));
+export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(Login));
