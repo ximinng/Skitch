@@ -4,8 +4,15 @@ import store from './store';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import {view as Portal} from './common/portal';
-import {view as Admin} from './common/admin';
-import {view as Login} from './pages/login';
+import {view as AdminComponent} from './common/admin';
+import {view as LoginComponent} from './pages/login';
+
+import {
+    userIsNotAuthenticated, userIsAuthenticated
+} from './pages/login/auth';
+
+const Admin = userIsAuthenticated(AdminComponent);
+const Login = userIsNotAuthenticated(LoginComponent);
 
 class App extends Component {
     render() {

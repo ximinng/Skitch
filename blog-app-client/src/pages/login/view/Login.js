@@ -5,7 +5,7 @@ import * as actions from '../actions';
 import './style.css';
 
 class Login extends PureComponent {
-    /*处理表单提交*/
+    /*处理用户登录表单提交*/
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -70,7 +70,7 @@ const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
     userLogin(user) {
-        dispatch(actions.userLoginAction(user))
+        dispatch(actions.login(user))
     }
 });
 

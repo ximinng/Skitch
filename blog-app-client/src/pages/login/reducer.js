@@ -3,17 +3,20 @@ import {fromJS} from "immutable";
 import {ACCESS_TOKEN} from '../../common/Constants';
 
 const defaultState = fromJS({
-    token: '',
-    isLogin: false,
+    user: '',
+    token: null,
+    isLoading: false
 });
 
 export default (state = defaultState, action) => {
     switch (action.type) {
-        case actions.LOGIN:
+        case actions.USER_LOGGING_IN:
+            return state.set('isLoading', fromJS(true));
+        case actions.USER_LOGGED_IN:
             localStorage.setItem(ACCESS_TOKEN, action.token);
             return state.merge({
                 token: fromJS(action.token),
-                isLogin: fromJS(action.isLogin)
+                isLoading: fromJS(false)
             });
         default:
             return state;

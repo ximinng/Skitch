@@ -3,7 +3,7 @@ export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localh
 export const AUTH_BASE_URL = 'http://localhost:8080/auth';
 export const TIMEOUT = 0;
 
-export const ACCESS_TOKEN = 'accessToken';
+export const ACCESS_TOKEN = 'accessToken'; // Token Key
 
 export const SUCCESS = '0';
 export const ERROR = '1';
