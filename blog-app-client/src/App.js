@@ -11,8 +11,8 @@ import {
     userIsNotAuthenticated, userIsAuthenticated
 } from './pages/login/auth';
 
-const Admin = userIsAuthenticated(AdminComponent);
 const Login = userIsNotAuthenticated(LoginComponent);
+const Admin = userIsAuthenticated(AdminComponent);
 
 class App extends Component {
     render() {
