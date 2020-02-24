@@ -9,7 +9,7 @@ import {view as LoginComponent} from './pages/login';
 
 import {
     userIsNotAuthenticated, userIsAuthenticated
-} from './pages/login/auth';
+} from './common/auth';
 
 const Login = userIsNotAuthenticated(LoginComponent);
 const Admin = userIsAuthenticated(AdminComponent);
