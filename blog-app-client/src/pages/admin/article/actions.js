@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
-import * as Constants from '../../../common/Constants';
+import * as Constants from '../../../common/constants';
 import Qs from 'qs';
 
 const requestLabelAndSortInfos = (labelItems, sortItems, msg) => ({

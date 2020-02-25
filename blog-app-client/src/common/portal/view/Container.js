@@ -6,11 +6,10 @@ import Portal from './Portal';
 class Container extends PureComponent {
 
     render() {
-        console.log(this.props);
-
         const {match, author} = this.props;
+
         return (
-            <Portal match={this.props.match} author={author}/>
+            <Portal match={match} author={author}/>
         );
     }
 }

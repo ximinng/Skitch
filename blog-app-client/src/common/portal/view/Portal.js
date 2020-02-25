@@ -12,6 +12,7 @@ const IconFont = Icon.createFromIconfontCN({
     scriptUrl: '//at.alicdn.com/t/font_1370406_qnpnxgr0rpm.js',
 });
 
+// 定义博客页面布局
 function Portal({match}) {
     return (
         <Layout>

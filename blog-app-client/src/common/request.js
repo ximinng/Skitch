@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {API_BASE_URL, AUTH_BASE_URL, TIMEOUT} from './Constants';
+import {API_BASE_URL, AUTH_BASE_URL, TIMEOUT} from './constants';
 
 export const api = axios.create({
     baseURL: API_BASE_URL,

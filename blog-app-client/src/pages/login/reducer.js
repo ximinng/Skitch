@@ -1,6 +1,6 @@
 import * as actions from './actionTypes';
 import {fromJS} from "immutable";
-import {ACCESS_TOKEN} from '../../common/Constants';
+import {ACCESS_TOKEN} from '../../common/constants';
 
 const defaultState = fromJS({
     user: '',
