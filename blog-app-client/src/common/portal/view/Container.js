@@ -4,25 +4,21 @@ import * as actions from '../actions';
 import Portal from './Portal';
 
 class Container extends PureComponent {
-
     render() {
-        const {match, author} = this.props;
+        console.log(this.props);
+        const {match, routes} = this.props;
 
         return (
-            <Portal match={match} author={author}/>
+            <div>
+                <Portal match={match} routes={routes}/>
+            </div>
         );
     }
 }
 
-const mapStateToProps = (state) => ({
-    author: state.getIn(['portal', 'author'])
-});
+const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = (dispatch) => ({
-    changeInputValue() {
-        dispatch(actions.getSiteFooterDesc())
-    }
-});
+const mapDispatchToProps = (dispatch) => ({});
 
 // Container connect with store
 export default connect(mapStateToProps, mapDispatchToProps)(Container);

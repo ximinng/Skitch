@@ -1,11 +1,11 @@
 import React from 'react';
-import {Route, Link} from "react-router-dom";
+import {Switch, Link, useRouteMatch, useParams} from "react-router-dom";
 
 import {Layout, Menu, BackTop, List, Icon} from 'antd';
 import './style.css';
 
-import {view as Home} from '../../../pages/home';
-import {view as Article} from '../../../pages/article';
+import {routes, RouteWithSubRoutes} from '../../routes';
+
 
 const {Header, Content, Footer} = Layout;
 const IconFont = Icon.createFromIconfontCN({
@@ -13,7 +13,11 @@ const IconFont = Icon.createFromIconfontCN({
 });
 
 // 定义博客页面布局
-function Portal({match}) {
+function Portal({routes}) {
+    // console.log(routes);
+    // console.log(useRouteMatch());
+    // console.log(useParams());
+
     return (
         <Layout>
             <Header style={{position: 'fixed', zIndex: 1, width: '100%', backgroundColor: '#FFFFFF'}}>
@@ -23,7 +27,8 @@ function Portal({match}) {
                       style={{lineHeight: '64px'}}
                 >
                     <Menu.Item key="1">
-                        <Link to={`${match.path}`}>主页</Link>
+                        {/*<Link to={`${match.path}`}>主页</Link>*/}
+                        主页
                     </Menu.Item>
                     <Menu.Item key="2">
                         {/*<Link to={`${match.path}article`}>Article</Link>*/}
@@ -34,8 +39,11 @@ function Portal({match}) {
             </Header>
 
             <Content style={{padding: '0 50px', marginTop: 64}}>
-                <Route path={`${match.path}`} exact component={Home}/>
-                <Route path={`${match.path}article`} component={Article}/>
+                <Switch>
+                    {routes.map((route, i) => (
+                        <RouteWithSubRoutes key={i} {...route} />
+                    ))}
+                </Switch>
             </Content>
 
             <Footer style={{textAlign: 'center'}}>

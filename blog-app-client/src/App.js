@@ -4,17 +4,16 @@ import store from './store';
 import {BrowserRouter, Switch} from 'react-router-dom';
 import {routes, RouteWithSubRoutes} from './common/routes';
 
+
 class App extends Component {
     render() {
         return (
             <Provider store={store}>
                 <BrowserRouter>
                     <Switch>
-                        {
-                            routes.map((route, i) => (
-                                <RouteWithSubRoutes key={i} {...route}/>
-                            ))
-                        }
+                        {routes.map((route, i) => (
+                            <RouteWithSubRoutes key={i} {...route} />
+                        ))}
                     </Switch>
                 </BrowserRouter>
             </Provider>
