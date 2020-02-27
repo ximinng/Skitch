@@ -1,18 +1,17 @@
 import React from 'react';
 import {Switch, Link, useRouteMatch, useParams} from "react-router-dom";
 
-import {Layout, Menu, BackTop, List, Icon} from 'antd';
+import {Layout, Menu, Row, Col, Typography, BackTop, List, Icon, PageHeader, Button} from 'antd';
 import './style.css';
 
-import {routes, RouteWithSubRoutes} from '../../routes';
+import {RouteWithSubRoutes} from '../../routes';
 
-
-const {Header, Content, Footer} = Layout;
+const {Header, Content, Sider, Footer} = Layout;
 const IconFont = Icon.createFromIconfontCN({
     scriptUrl: '//at.alicdn.com/t/font_1370406_qnpnxgr0rpm.js',
 });
 
-// 定义博客页面布局
+// // 定义博客页面布局
 function Portal({routes}) {
     // console.log(routes);
     // console.log(useRouteMatch());
